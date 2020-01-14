@@ -1,0 +1,18 @@
+#app para criação de tunnel na web
+https://ngrok.com/
+
+#server HTPP
+python -m SimpleHTTPServer 8080
+
+#Problema com react no whatcher dos arquivos
+CHOKIDAR_USEPOLLING=true
+
+#Esquema de atualização
+
+major.miror.patch
+se usar o ^ ele vai atualizar automaticamente as versoes miror e patch
+"react": "^16.12.0",
+
+#npm detalhes
+
+tem que usar o RUN para comandos diferentes do start e do test porque isso não foi implementando por padrão
