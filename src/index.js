@@ -1,21 +1,8 @@
-import { Tweet } from './components/Tweet/Tweet.jsx'
 import ReactDOM from 'react-dom'
+import React from 'react'
 
-const tweetsArea = document.querySelector('.tweetsArea')
+import { Home } from './pages/Home/Home.jsx'
 
-const listaTweets = [
-    Tweet({
-        conteudo: 'oi',
-        nomeCompletoUsuario: 'Danilo Bueno',
-        nomeUsuario: 'danilocbueno',
-        qtLikes: 2
-    }),
-    Tweet({
-        conteudo: 'tchau',
-        nomeCompletoUsuario: 'Fabiane Bueno',
-        nomeUsuario: 'fabueno',
-        qtLikes: 1
-    })
-]
+const tweetsArea = document.querySelector('body')
 
-ReactDOM.render(listaTweets, tweetsArea)
+ReactDOM.render(<Home/>, tweetsArea)

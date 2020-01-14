@@ -12,13 +12,16 @@ function TweetCabecalho({nomeCompletoUsuario, nomeUsuario}) {
     )
 }
 
-export function Tweet(objetao) {
-    const { conteudo } = objetao
+export function Tweet(props) {
     return (
         <article className="tweet">
-           { TweetCabecalho(objetao) }
-            <p className="tweet__conteudo">{ conteudo }</p>
-           { TweetRodape(objetao) }
+           <TweetCabecalho 
+                nomeCompletoUsuario={props.nomeCompletoUsuario}
+                nomeUsuario={props.nomeUsuario}/>
+
+            <p className="tweet__conteudo">{ props.conteudo }</p>
+           
+           <TweetRodape qtLikes={props.qtLikes}/>
         </article>
     )
 }
