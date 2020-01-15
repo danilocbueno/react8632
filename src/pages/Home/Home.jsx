@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { Tweet, Cabecalho, NavMenu, Dashboard, Widget, TrendsArea } from '../../components/index.js'
 
@@ -36,6 +36,24 @@ export function Home() {
         )
     ]
 
+    const [ valorTamanhoTweetNovo, setTamanhoTweetNovo ] = useState(0)
+
+    function onChangeTextarea(evento) {
+        console.log(evento)
+        const novoTamanho = evento.target.value.length
+        setTamanhoTweetNovo(novoTamanho)
+    }
+
+    function onSubmitForm(evento) {
+        evento.preventDefault()
+        console.log(evento)
+        console.log(evento.target.value)
+    }
+
+    const isInvalid = valorTamanhoTweetNovo > 140
+
+    const novoTweetStatusClass = isInvalid ? "novoTweet__status novoTweet__status--invalido" : "novoTweet__status"
+
     return (
         <div>
             <Cabecalho>
@@ -47,10 +65,10 @@ export function Home() {
                     <Widget>
                         <form className="novoTweet">
                             <div className="novoTweet__editorArea">
-                                <span className="novoTweet__status">0/140</span>
-                                <textarea className="novoTweet__editor" placeholder="O que está acontecendo?"></textarea>
+                                <span className={ novoTweetStatusClass }>{ valorTamanhoTweetNovo }/140</span>
+                                <textarea onChange={ onChangeTextarea } className="novoTweet__editor" placeholder="O que está acontecendo?"></textarea>
                             </div>
-                            <button type="submit" className="novoTweet__envia">Tweetar</button>
+                            <button disabled={ isInvalid } type="submit" className="novoTweet__envia" onClick={onSubmitForm}>Tweetar</button>
                         </form>
                     </Widget>
                     <Widget>
