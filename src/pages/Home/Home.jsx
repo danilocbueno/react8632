@@ -4,53 +4,56 @@ import { Tweet, Cabecalho, NavMenu, Dashboard, Widget, TrendsArea } from '../../
 
 export function Home() {
 
-    const infoTweet1 = {
+
+    const dadosTweets = [{
         conteudo: 'oi',
         nomeCompletoUsuario: 'Danilo Bueno',
         nomeUsuario: 'danilocbueno',
-        qtLikes: 2
-    }
-    
-    const infoTweet2 = {
+        qtLikes: 2,
+        id:100
+    },
+    {
         conteudo: 'tchau',
         nomeCompletoUsuario: 'Fabiane Bueno',
         nomeUsuario: 'fabueno',
-        qtLikes: 1
-    }
+        qtLikes: 1,
+        id: 200
+    }]
     
-    const listaTweets = [
-        <Tweet 
-            nomeCompletoUsuario={infoTweet1.nomeCompletoUsuario}
-            nomeUsuario={infoTweet1.nomeUsuario}
-            qtLikes={infoTweet1.qtLikes}
-            key="1">
-                {infoTweet1.conteudo}
-        </Tweet>,
-    
-        <Tweet {...infoTweet2} key="2">{infoTweet2.conteudo}</Tweet>,
+    const [ listaDadosTweet, setNovoDadosTweet ] = useState(dadosTweets)
 
-        React.createElement(
-            Tweet,
-            {...infoTweet1, key:3},
-            ["alo, alo"]
-        )
-    ]
-
-    const [ valorTamanhoTweetNovo, setTamanhoTweetNovo ] = useState(0)
+    const [ textoTweetNovo, setTextoTweetNovo ] = useState("")
 
     function onChangeTextarea(evento) {
-        console.log(evento)
-        const novoTamanho = evento.target.value.length
-        setTamanhoTweetNovo(novoTamanho)
+        const textoTweet = evento.target.value
+        setTextoTweetNovo(textoTweet)
     }
 
-    function onSubmitForm(evento) {
+    function onSubmitNovoTweet(evento) {
         evento.preventDefault()
-        console.log(evento)
-        console.log(evento.target.value)
+
+        //primeira opção de pegar o valor do elemento via DOM do React
+        //console.log(evento.target.elements.novoTweet.value)
+
+        //segunda ideia: em vez de pegar o tamanho e utilizar no onChangeTextArea, pega o texto e guarda no estado
+
+        const novoTweet = {
+            conteudo: textoTweetNovo,
+            nomeCompletoUsuario: 'Fabiane Bueno',
+            nomeUsuario: 'fabueno',
+            qtLikes: 1,
+            id: textoTweetNovo
+        }
+
+        /* funciona a adição na lista, porém não vai ser renderizado novamente o componente porque o "render" do componente não vai ser chamado, ele so chama quando se utiliza o set
+        listaDadosTweet.unshift(novoTweet)
+        setNovoDadosTweet(listaDadosTweet) */
+
+        setNovoDadosTweet([novoTweet, ...listaDadosTweet]) //tem que criar uma lista nova porque se não o react não consegue trabalhar bem
+
     }
 
-    const isInvalid = valorTamanhoTweetNovo > 140
+    const isInvalid = textoTweetNovo.length > 140
 
     const novoTweetStatusClass = isInvalid ? "novoTweet__status novoTweet__status--invalido" : "novoTweet__status"
 
@@ -63,12 +66,12 @@ export function Home() {
             <div className="container">
                 <Dashboard>
                     <Widget>
-                        <form className="novoTweet">
+                        <form onSubmit={ onSubmitNovoTweet } className="novoTweet">
                             <div className="novoTweet__editorArea">
-                                <span className={ novoTweetStatusClass }>{ valorTamanhoTweetNovo }/140</span>
-                                <textarea onChange={ onChangeTextarea } className="novoTweet__editor" placeholder="O que está acontecendo?"></textarea>
+                                <span className={ novoTweetStatusClass }>{ textoTweetNovo.length }/140</span>
+                                <textarea id="novoTweet" onChange={ onChangeTextarea } className="novoTweet__editor" placeholder="O que está acontecendo?"></textarea>
                             </div>
-                            <button disabled={ isInvalid } type="submit" className="novoTweet__envia" onClick={onSubmitForm}>Tweetar</button>
+                            <button disabled={ isInvalid } type="submit" className="novoTweet__envia">Tweetar</button>
                         </form>
                     </Widget>
                     <Widget>
@@ -79,7 +82,11 @@ export function Home() {
                 <Dashboard posicao="centro">
                     <Widget>
                         <div className="tweetsArea">
-                            { listaTweets }
+                            { listaDadosTweet.map(infoTweet =>  
+                                <Tweet {...infoTweet} key={infoTweet.id}>
+                                    {infoTweet.conteudo}
+                                </Tweet> 
+                            )}
                         </div>
                     </Widget>
                 </Dashboard>
