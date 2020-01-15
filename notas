@@ -16,3 +16,6 @@ se usar o ^ ele vai atualizar automaticamente as versoes miror e patch
 #npm detalhes
 
 tem que usar o RUN para comandos diferentes do start e do test porque isso não foi implementando por padrão
+
+#Compartilhamento de arquivos
+https://send.firefox.com/

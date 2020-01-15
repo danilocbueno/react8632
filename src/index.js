@@ -3,6 +3,6 @@ import React from 'react'
 
 import { Home } from './pages/Home/Home.jsx'
 
-const tweetsArea = document.querySelector('body')
+const tweetsArea = document.querySelector('#root')
 
 ReactDOM.render(<Home/>, tweetsArea)

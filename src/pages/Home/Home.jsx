@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Tweet } from '../../components/Tweet/Tweet'
+import { Tweet, Cabecalho, NavMenu, Dashboard, Widget, TrendsArea } from '../../components/index.js'
 
 export function Home() {
 
@@ -22,80 +22,50 @@ export function Home() {
         <Tweet 
             nomeCompletoUsuario={infoTweet1.nomeCompletoUsuario}
             nomeUsuario={infoTweet1.nomeUsuario}
-            qtLikes={infoTweet1.qtLikes}>
+            qtLikes={infoTweet1.qtLikes}
+            key="1">
                 {infoTweet1.conteudo}
         </Tweet>,
     
-        <Tweet {...infoTweet2}>{infoTweet2.conteudo}</Tweet>
+        <Tweet {...infoTweet2} key="2">{infoTweet2.conteudo}</Tweet>,
+
+        React.createElement(
+            Tweet,
+            {...infoTweet1, key:3},
+            ["alo, alo"]
+        )
     ]
 
     return (
         <div>
-            <header class="cabecalho">
-                <div class="cabecalho__container container">
-                    <h1 class="cabecalho__logo">
-                        <a href="/">Twitelum</a>
-                    </h1>
-                    <nav class="navMenu">
-                        <ul class="navMenu__lista">
-                            <li class="navMenu__item">
-                                <a class="navMenu__link" href="/">
-                                    Bem vindo(a): <br />
-                                    <strong> @alumna</strong>
-                                </a>
-                            </li>
-                            <li class="navMenu__item">
-                                <a class="navMenu__link" href="/">
-                                    Página Inicial
-                                </a>
-                            </li>
-                            <li class="navMenu__item">
-                                <a class="navMenu__link" href="/hashtags">
-                                    Hashtags
-                                </a>
-                            </li>
-                            <li class="navMenu__item">
-                                <a class="navMenu__link" href="/logout">
-                                    Logout
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </header>
+            <Cabecalho>
+            <NavMenu> </NavMenu>
+            </Cabecalho>
 
-            <div class="container">
+            <div className="container">
+                <Dashboard>
+                    <Widget>
+                        <form className="novoTweet">
+                            <div className="novoTweet__editorArea">
+                                <span className="novoTweet__status">0/140</span>
+                                <textarea className="novoTweet__editor" placeholder="O que está acontecendo?"></textarea>
+                            </div>
+                            <button type="submit" className="novoTweet__envia">Tweetar</button>
+                        </form>
+                    </Widget>
+                    <Widget>
+                        <TrendsArea></TrendsArea>
+                    </Widget>
+                </Dashboard>
 
-            <div class="dashboard">
-                <div class="widget">
-                    <form class="novoTweet">
-                        <div class="novoTweet__editorArea">
-                            <span class="novoTweet__status">0/140</span>
-                            <textarea class="novoTweet__editor" placeholder="O que está acontecendo?"></textarea>
+                <Dashboard posicao="centro">
+                    <Widget>
+                        <div className="tweetsArea">
+                            { listaTweets }
                         </div>
-                        <button type="submit" class="novoTweet__envia">Tweetar</button>
-                    </form>
-                </div>
-                <div class="widget">
-                    <div class="trendsArea">
-                        <h2 class="trendsArea__titulo widget__titulo">Trends Brasil</h2>
-                        <ol class="trendsArea__lista">
-                            <li><a href="/">#react</a></li>
-                            <li><a href="/">#reactHooks</a></li>
-                        </ol>
-                    </div>
-                </div>
+                    </Widget>
+                </Dashboard>
             </div>
-
-            <div class="dashboard dashboard__centro">
-                <div class="widget">
-                    <div class="tweetsArea">
-                        { listaTweets }
-                    </div>
-                </div>
-            </div>
-
-        </div>
         </div>
     )
 }
