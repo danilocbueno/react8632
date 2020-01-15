@@ -1,26 +1,24 @@
 import React, { useState } from 'react'
-
 import { Tweet, Cabecalho, NavMenu, Dashboard, Widget, TrendsArea } from '../../components/index.js'
 
+const dadosTweetsFake = [{
+    conteudo: 'oi',
+    nomeCompletoUsuario: 'Danilo Bueno',
+    nomeUsuario: 'danilocbueno',
+    qtLikes: 2,
+    id:100
+},
+{
+    conteudo: 'tchau',
+    nomeCompletoUsuario: 'Fabiane Bueno',
+    nomeUsuario: 'fabueno',
+    qtLikes: 1,
+    id: 200
+}]
+
 export function Home() {
-
-
-    const dadosTweets = [{
-        conteudo: 'oi',
-        nomeCompletoUsuario: 'Danilo Bueno',
-        nomeUsuario: 'danilocbueno',
-        qtLikes: 2,
-        id:100
-    },
-    {
-        conteudo: 'tchau',
-        nomeCompletoUsuario: 'Fabiane Bueno',
-        nomeUsuario: 'fabueno',
-        qtLikes: 1,
-        id: 200
-    }]
     
-    const [ listaDadosTweet, setNovoDadosTweet ] = useState(dadosTweets)
+    const [ listaDadosTweet, setNovoDadosTweet ] = useState(dadosTweetsFake)
 
     const [ textoTweetNovo, setTextoTweetNovo ] = useState("")
 

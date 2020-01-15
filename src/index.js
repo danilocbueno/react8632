@@ -1,8 +1,8 @@
 import ReactDOM from 'react-dom'
 import React from 'react'
 
-import { Home } from './pages/Home/Home.jsx'
+import { App } from './pages/App.jsx'
 
-const tweetsArea = document.querySelector('#root')
+const root = document.querySelector('#root')
 
-ReactDOM.render(<Home/>, tweetsArea)
+ReactDOM.render(<App/>, root)

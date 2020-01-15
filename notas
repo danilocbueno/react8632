@@ -19,3 +19,18 @@ tem que usar o RUN para comandos diferentes do start e do test porque isso não 
 
 #Compartilhamento de arquivos
 https://send.firefox.com/
+
+#Framework mais famoso de Server-Side Rendering
+#next.js
+
+
+#explicacao do router
+já que deveria ir toda hora buscar do server, pq nao fazer com que o proprio JS faca a renderizacao da pagina toda..entao nao precisa ir buscar novamente o HTML ou outros arquivos do servidor, o proprio JS vai desenhar de novo a tela...
+
+problema vai acontecer agora com o o primeiro carregamento...nao primeira requisicao vai vir apenas o HTML vazio, depois vai vir o script que vai ser pedido novamente para o server, e so entao a pagina vai comecar a carregar...
+
+Nisso, o usuario vai ficar esperando a app carregar, em tela em branco, oq é ruim, ainda mais para dispositivos com capacidade mais baixa (celulares)..alem do carregamento ainda tem o problema do JS ser utulizado para carregar, oq vai consumir recurso de hardware.
+
+Solução não foi criada pela equipe do React, pq eles nao tem interesse em criar a aplicação inteira e sim apenas uma parte da aplicação, então outras empresas que estavam construindo a app inteira pensaram em outra solução, o server-side rendering.
+
+A primeira solução foi voltar ao que era antigamente, ou seja, a linguagem de backEnd vai cuspir um HTML padrão para que no primeiro carregamento o usuário não precise carregar toda a pagina...resolve, porem o react continua na jogada e ai a hora que o react eh carregado, o DOM carregado 
