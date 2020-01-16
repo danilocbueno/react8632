@@ -6,13 +6,13 @@ import { Redirect } from 'react-router-dom'
 
 import * as AutenticarService from '../../model/services/AutenticarService.js'
 
-import { Contexto as NotificacaoContexto } from '../../components/Notificacao/Notificacao.jsx'
+import { Contexto } from '../../components/Notificacao/Notificacao.jsx'
 
 import './loginPage.css'
 
 function Login() {
 
-    const { setMsg } = useContext(NotificacaoContexto)
+    const { setMsg } = useContext(Contexto)
 
     const [ msgErro, setMsgErro ] = useState("")
 
@@ -31,7 +31,6 @@ function Login() {
             .then(()=> {
                 setIsLogado(true)
                 setMsg("Logado com sucesso!")
-                alert("aeww")
             })
             .catch((erro) => {
                 setMsgErro(erro.message)

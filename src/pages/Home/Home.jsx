@@ -10,14 +10,14 @@ const dadosTweetsFake = [{
     nomeCompletoUsuario: 'Danilo Bueno',
     nomeUsuario: 'danilocbueno',
     qtLikes: 2,
-    id:100
+    id:1200
 },
 {
     conteudo: 'tchau',
     nomeCompletoUsuario: 'Fabiane Bueno',
     nomeUsuario: 'fabueno',
     qtLikes: 1,
-    id: 200
+    id: 2001
 }]
 
 export function Home() {
@@ -60,12 +60,13 @@ export function Home() {
     function adicionaTweet(novoTweet) {
         setNovoDadosTweet( [novoTweet, ...listaDadosTweet ])
     }
-
+    
     useEffect(()=> {
         setTimeout(()=> {
             setMsg("")
         }, 5000)
     })
+    
    
     /*Usando o Hook, ele vai carregar apos o carregamento do DOM do react, a lista vazia informa que voce nao tem nenhuma restricao, vai carregar apos a renderizacao*/
     /*
@@ -76,6 +77,7 @@ export function Home() {
         })
     },[])
     */
+
 
 
     return (
