@@ -57,3 +57,13 @@ Service Workers:
 usuario e senha do https://twitelum-api.herokuapp.com/login
 artdiniz
 123456
+
+perguntar do componente so com um DIV
+
+Uma das soluções é a prop de callback
+
+Prop drilling é o problema das prop callback quando tem muito aprofundamento de componentes
+
+
+
+artur.adam@caelum.com.br

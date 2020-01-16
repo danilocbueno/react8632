@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
-import { Tweet, Cabecalho, NavMenu, Dashboard, Widget, TrendsArea } from '../../components/index.js'
+import { Tweet, Cabecalho, NavMenu, Dashboard, Widget, TrendsArea, Form } from '../../components/index.js'
+
+import * as TweetsService from '../../model/services/TweetsService.js'
 
 const dadosTweetsFake = [{
     conteudo: 'oi',
@@ -20,7 +22,7 @@ export function Home() {
     
     const [ listaDadosTweet, setNovoDadosTweet ] = useState(dadosTweetsFake)
 
-    const [ textoTweetNovo, setTextoTweetNovo ] = useState("")
+    /* FOI REMOVIDO PARA O FORM SOZINHO!
 
     function onChangeTextarea(evento) {
         const textoTweet = evento.target.value
@@ -45,15 +47,21 @@ export function Home() {
 
         /* funciona a adição na lista, porém não vai ser renderizado novamente o componente porque o "render" do componente não vai ser chamado, ele so chama quando se utiliza o set
         listaDadosTweet.unshift(novoTweet)
-        setNovoDadosTweet(listaDadosTweet) */
+        setNovoDadosTweet(listaDadosTweet) 
 
         setNovoDadosTweet([novoTweet, ...listaDadosTweet]) //tem que criar uma lista nova porque se não o react não consegue trabalhar bem
 
+        /* FOI REMOVIDO PARA O FORM SOZINHO! */
+        
+    function adicionaTweet(novoTweet) {
+        setNovoDadosTweet( [novoTweet, ...listaDadosTweet ])
     }
-
-    const isInvalid = textoTweetNovo.length > 140
-
-    const novoTweetStatusClass = isInvalid ? "novoTweet__status novoTweet__status--invalido" : "novoTweet__status"
+   
+    /*se chamar sem o Hook ele fica infinito */
+    TweetsService.carrega()
+        .then(listaServidor => {
+            setNovoDadosTweet([...listaServidor, ...listaDadosTweet])
+        })
 
     return (
         <div>
@@ -64,13 +72,7 @@ export function Home() {
             <div className="container">
                 <Dashboard>
                     <Widget>
-                        <form onSubmit={ onSubmitNovoTweet } className="novoTweet">
-                            <div className="novoTweet__editorArea">
-                                <span className={ novoTweetStatusClass }>{ textoTweetNovo.length }/140</span>
-                                <textarea id="novoTweet" onChange={ onChangeTextarea } className="novoTweet__editor" placeholder="O que está acontecendo?"></textarea>
-                            </div>
-                            <button disabled={ isInvalid } type="submit" className="novoTweet__envia">Tweetar</button>
-                        </form>
+                        <Form adicionaTweet={adicionaTweet}/>
                     </Widget>
                     <Widget>
                         <TrendsArea></TrendsArea>
