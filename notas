@@ -1,6 +1,14 @@
 #app para criação de tunnel na web
 https://ngrok.com/
 
+
+#links importantes
+github dos codigos de aula
+https://github.com/CaelumAulas/react8632
+
+apostila
+http://aluno.caelum.com.br/login
+
 #server HTPP
 python -m SimpleHTTPServer 8080
 
@@ -23,6 +31,9 @@ https://send.firefox.com/
 #Framework mais famoso de Server-Side Rendering
 #next.js
 
+#criacao de variavel de ambiente no react
+elas precisam comecar com REACT_APP porque o REACT tem uma lista de variaveis de ambiente permitidas..
+
 
 #explicacao do router
 já que deveria ir toda hora buscar do server, pq nao fazer com que o proprio JS faca a renderizacao da pagina toda..entao nao precisa ir buscar novamente o HTML ou outros arquivos do servidor, o proprio JS vai desenhar de novo a tela...
@@ -34,3 +45,15 @@ Nisso, o usuario vai ficar esperando a app carregar, em tela em branco, oq é ru
 Solução não foi criada pela equipe do React, pq eles nao tem interesse em criar a aplicação inteira e sim apenas uma parte da aplicação, então outras empresas que estavam construindo a app inteira pensaram em outra solução, o server-side rendering.
 
 A primeira solução foi voltar ao que era antigamente, ou seja, a linguagem de backEnd vai cuspir um HTML padrão para que no primeiro carregamento o usuário não precise carregar toda a pagina...resolve, porem o react continua na jogada e ai a hora que o react eh carregado, o DOM carregado 
+
+Testes React:
+	Kent C. Dods
+
+Service Workers:
+	Google Dev Site
+	Jake Archibald
+
+
+usuario e senha do https://twitelum-api.herokuapp.com/login
+artdiniz
+123456
