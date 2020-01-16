@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Tweet, Cabecalho, NavMenu, Dashboard, Widget, TrendsArea, Form } from '../../components/index.js'
 
 import * as TweetsService from '../../model/services/TweetsService.js'
+
+import { Contexto } from '../../components/Notificacao/Notificacao.jsx'
 
 const dadosTweetsFake = [{
     conteudo: 'oi',
@@ -21,6 +23,8 @@ const dadosTweetsFake = [{
 export function Home() {
     
     const [ listaDadosTweet, setNovoDadosTweet ] = useState(dadosTweetsFake)
+
+    const { setMsg } = useContext(Contexto)
 
     /* FOI REMOVIDO PARA O FORM SOZINHO!
 
@@ -56,12 +60,23 @@ export function Home() {
     function adicionaTweet(novoTweet) {
         setNovoDadosTweet( [novoTweet, ...listaDadosTweet ])
     }
+
+    useEffect(()=> {
+        setTimeout(()=> {
+            setMsg("")
+        }, 5000)
+    })
    
-    /*se chamar sem o Hook ele fica infinito */
-    TweetsService.carrega()
+    /*Usando o Hook, ele vai carregar apos o carregamento do DOM do react, a lista vazia informa que voce nao tem nenhuma restricao, vai carregar apos a renderizacao*/
+    /*
+    useEffect(()=> {
+        TweetsService.carrega()
         .then(listaServidor => {
             setNovoDadosTweet([...listaServidor, ...listaDadosTweet])
         })
+    },[])
+    */
+
 
     return (
         <div>

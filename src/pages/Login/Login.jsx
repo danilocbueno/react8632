@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react'
+import React, { useState, Fragment, useContext } from 'react'
 import { Cabecalho } from '../../components/Cabecalho/Cabecalho.jsx'
 import { Widget } from '../../components/Widget/Widget.jsx'
 
@@ -6,9 +6,13 @@ import { Redirect } from 'react-router-dom'
 
 import * as AutenticarService from '../../model/services/AutenticarService.js'
 
+import { Contexto as NotificacaoContexto } from '../../components/Notificacao/Notificacao.jsx'
+
 import './loginPage.css'
 
 function Login() {
+
+    const { setMsg } = useContext(NotificacaoContexto)
 
     const [ msgErro, setMsgErro ] = useState("")
 
@@ -26,6 +30,8 @@ function Login() {
         AutenticarService.autenticar(usuario, senha)
             .then(()=> {
                 setIsLogado(true)
+                setMsg("Logado com sucesso!")
+                alert("aeww")
             })
             .catch((erro) => {
                 setMsgErro(erro.message)
@@ -39,7 +45,7 @@ function Login() {
                 <div className="container">
                     <Widget>
                         <h2 className="loginPage__title">Seja bem vindo!</h2>
-                        <form onSubmit={onSubmitForm} className="loginPage__form" action="/">
+                        <form onSubmit={onSubmitForm}  className="loginPage__form" action="/">
                             <div className="loginPage__inputWrap">
                                 <label className="loginPage__label" htmlFor="login">Login</label> 
                                 <input className="loginPage__input" type="text" id="login" name="login"/>
